@@ -21,6 +21,7 @@ export const Portal: FC<{ children: ReactNode; wrapperId?: string }> = ({
 
   useEffect(() => {
     if (!canUseDOM()) return;
+
     let element = document.getElementById(wrapperId);
     let systemCreated = false;
     // if element is not found with wrapperId or wrapperId is not provided,

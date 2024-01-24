@@ -12,6 +12,7 @@ import {
 import { IContentProps, ReactHinterProps } from "../@types/common";
 import { renderHinterPos } from "../helpers/logic.ts";
 import { StandardContent } from "./standardContent.tsx";
+import { canUseDOM } from "../helpers/common.ts";
 
 const initialState: Pick<
   IContentProps,
@@ -80,7 +81,7 @@ export const ReactHinter: FC<ReactHinterProps> = memo(
     };
 
     useEffect(() => {
-      if (active) {
+      if (active && canUseDOM()) {
         const elems = document.querySelectorAll(
           `[data-rh-namespace='${namespace}']`,
         );
