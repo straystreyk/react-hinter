@@ -25,7 +25,7 @@ const initialState: Pick<
   position: { left: undefined, top: undefined },
 };
 
-const ReactHinterCore: FC<ReactHinterProps> = memo(
+export const ReactHinter: FC<ReactHinterProps> = memo(
   ({ active, namespace, onEnd, content: Content, className }) => {
     const ref = useRef<HTMLDivElement>(null);
     const [info, setInfo] = useState(initialState);
@@ -114,6 +114,7 @@ const ReactHinterCore: FC<ReactHinterProps> = memo(
     }, [info.currentStep, ref]);
 
     if (!namespace) return null;
+
     return (
       <Portal wrapperId="__REACT_HINTER_PORTAL__">
         <div
@@ -142,15 +143,3 @@ const ReactHinterCore: FC<ReactHinterProps> = memo(
     );
   },
 );
-
-export const ReactHinter: FC<ReactHinterProps> = memo((props) => {
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    if (canUseDOM()) setMounted(true);
-  }, []);
-
-  return !mounted ? null : <ReactHinterCore {...props} />;
-});
-
-ReactHinter.displayName = "ReactHinter";
