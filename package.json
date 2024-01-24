@@ -11,6 +11,10 @@
     ".": {
       "import": "./dist/main.js",
       "require": "./dist/main.cjs"
+    },
+    "./dist/assets/style.css": {
+      "import": "./dist/assets/style.css",
+      "require": "./dist/assets/style.css"
     }
   },
   "license": "ISC",
@@ -54,8 +58,5 @@
     "vite": "^5.0.8",
     "vite-plugin-dts": "^3.7.1",
     "vite-plugin-lib-inject-css": "^1.3.0"
-  },
-  "sideEffects": [
-    "**/*.css"
-  ]
+  }
 }

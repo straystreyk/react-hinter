@@ -15,9 +15,8 @@ export default defineConfig({
       formats: ["umd", "es"],
     },
     rollupOptions: {
-      external: ["react", "react-dom"],
+      external: ["react", "react-dom", "react/jsx-runtime"],
       output: {
-        inlineDynamicImports: false,
         assetFileNames: "assets/[name][extname]",
         globals: {
           react: "React",
