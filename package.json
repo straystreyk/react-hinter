@@ -1,9 +1,9 @@
 {
   "name": "react-hinter",
-  "private": true,
   "version": "0.0.0",
   "type": "module",
   "main": "dist/main.js",
+  "license": "ISC",
   "contributors": [
     {
       "name": "Tigran Tskanyan",
