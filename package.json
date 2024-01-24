@@ -1,6 +1,6 @@
 {
   "name": "react-hinter",
-  "version": "0.1.11",
+  "version": "0.1.10",
   "type": "module",
   "main": "./dist/main.cjs",
   "module": "./dist/main.js",
@@ -8,9 +8,13 @@
     "dist"
   ],
   "exports": {
-    "./dist/style.css": {
-      "import": "./dist/style.css",
-      "require": "./dist/style.css"
+    ".": {
+      "import": "./dist/main.js",
+      "require": "./dist/main.cjs"
+    },
+    "./dist/main.css": {
+      "import": "./dist/main.css",
+      "require": "./dist/main.css"
     }
   },
   "types": "dist/main.d.ts",
