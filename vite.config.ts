@@ -8,6 +8,7 @@ export default defineConfig({
   plugins: [react(), dts({ include: ["lib"] }), libInjectCss()],
   build: {
     copyPublicDir: false,
+    ssr: true,
     lib: {
       name: "react-hinter",
       entry: resolve(__dirname, "lib/main.ts"),
