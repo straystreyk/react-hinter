@@ -8,15 +8,12 @@
     "dist"
   ],
   "exports": {
-    ".": {
-      "import": "./dist/main.js",
-      "require": "./dist/main.cjs"
-    },
-    "./dist/assets/style.css": {
-      "import": "./dist/assets/style.css",
-      "require": "./dist/assets/style.css"
+    "./dist/style.css": {
+      "import": "./dist/style.css",
+      "require": "./dist/style.css"
     }
   },
+  "types": "dist/main.d.ts",
   "license": "ISC",
   "contributors": [
     {
@@ -25,7 +22,6 @@
       "url": "https://github.com/straystreyk"
     }
   ],
-  "types": "dist/main.d.ts",
   "scripts": {
     "release:major": "npm version major",
     "release:minor": "npm version minor",
