@@ -2,7 +2,14 @@
   "name": "react-hinter",
   "version": "0.1.0",
   "type": "module",
-  "main": "dist/main.js",
+  "main": "./dist/react-hinter.umd.cjs",
+  "module": "./dist/react-hinter.js",
+  "exports": {
+    ".": {
+      "import": "./dist/react-hinter.js",
+      "require": "./dist/react-hinter.umd.cjs"
+    }
+  },
   "license": "ISC",
   "contributors": [
     {
