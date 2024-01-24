@@ -13,7 +13,6 @@ export default defineConfig({
     lib: {
       name: "react-hinter",
       entry: resolve(__dirname, "lib/main.ts"),
-      formats: ["umd", "es"],
     },
     rollupOptions: {
       external: ["react", "react-dom"],

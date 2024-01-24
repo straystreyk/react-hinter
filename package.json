@@ -4,6 +4,9 @@
   "type": "module",
   "main": "./dist/main.cjs",
   "module": "./dist/main.js",
+  "files": [
+    "dist/main.css"
+  ],
   "exports": {
     ".": {
       "import": "./dist/main.js",
@@ -19,9 +22,6 @@
     }
   ],
   "types": "dist/main.d.ts",
-  "files": [
-    "dist"
-  ],
   "scripts": {
     "release:major": "npm version major",
     "release:minor": "npm version minor",
