@@ -25,13 +25,13 @@ const initialState: Pick<
   position: { left: undefined, top: undefined },
 };
 
-export const ReactHinter: FC<ReactHinterProps> = memo(
+const ReactHinterCore: FC<ReactHinterProps> = memo(
   ({ active, namespace, onEnd, content: Content, className }) => {
     const ref = useRef<HTMLDivElement>(null);
     const [info, setInfo] = useState(initialState);
 
     const renderPosition = useCallback(() => {
-      if (!ref.current) return;
+      if (!ref.current || !canUseDOM()) return;
 
       const currentElement = info.elements?.find(
         (item) =>
@@ -109,7 +109,7 @@ export const ReactHinter: FC<ReactHinterProps> = memo(
     }, [namespace, active]);
 
     useEffect(() => {
-      if (!ref.current || !info.elements.length) return;
+      if (!ref.current || !info.elements.length || !canUseDOM()) return;
       renderPosition();
     }, [info.currentStep, ref]);
 
@@ -142,5 +142,15 @@ export const ReactHinter: FC<ReactHinterProps> = memo(
     );
   },
 );
+
+export const ReactHinter: FC<ReactHinterProps> = memo((props) => {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    if (canUseDOM()) setMounted(true);
+  }, []);
+
+  return !mounted ? null : <ReactHinterCore {...props} />;
+});
 
 ReactHinter.displayName = "ReactHinter";
