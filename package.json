@@ -5,7 +5,7 @@
   "main": "./dist/main.cjs",
   "module": "./dist/main.js",
   "files": [
-    "dist/main.css"
+    "dist"
   ],
   "exports": {
     ".": {
@@ -37,8 +37,6 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
     "@types/node": "^20.11.5",
     "@types/react": "^18.2.43",
     "@types/react-dom": "^18.2.17",
@@ -50,6 +48,8 @@
     "eslint-plugin-react-refresh": "^0.4.5",
     "glob": "^10.3.10",
     "prettier": "^3.2.4",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "typescript": "^5.2.2",
     "vite": "^5.0.8",
     "vite-plugin-dts": "^3.7.1",

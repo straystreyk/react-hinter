@@ -1,11 +1,10 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import dts from "vite-plugin-dts";
-import { libInjectCss } from "vite-plugin-lib-inject-css";
 import { resolve } from "path";
 
 export default defineConfig({
-  plugins: [react(), dts({ include: ["lib"] }), libInjectCss()],
+  plugins: [react(), dts({ include: ["lib"] })],
   build: {
     copyPublicDir: false,
     ssr: true,
@@ -13,11 +12,13 @@ export default defineConfig({
     lib: {
       name: "react-hinter",
       entry: resolve(__dirname, "lib/main.ts"),
+      formats: ["umd", "es"],
     },
     rollupOptions: {
       external: ["react", "react-dom"],
       output: {
         inlineDynamicImports: false,
+        assetFileNames: "assets/[name][extname]",
         globals: {
           react: "React",
           "react-dom": "ReactDOM",
