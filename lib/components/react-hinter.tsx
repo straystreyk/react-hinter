@@ -25,6 +25,8 @@ const initialState: Pick<
   position: { left: undefined, top: undefined },
 };
 
+const ACTIVE_CLASS = "react-hinter-active-element";
+
 export const ReactHinter: FC<ReactHinterProps> = memo(
   ({ active, namespace, onEnd, content: Content, className }) => {
     const ref = useRef<HTMLDivElement>(null);
@@ -46,6 +48,9 @@ export const ReactHinter: FC<ReactHinterProps> = memo(
 
     const handleFinish = () => {
       onEnd();
+      const currentElement = info.elements[info.currentStep - 1];
+      currentElement.classList.remove(ACTIVE_CLASS);
+
       setInfo((p) => ({
         ...initialState,
         text: p.text,
@@ -62,20 +67,28 @@ export const ReactHinter: FC<ReactHinterProps> = memo(
 
     const handleNext = () => {
       if (info.currentStep === info.steps) return handleFinish();
+      const nextElement = info.elements[info.currentStep];
+      const currentElement = info.elements[info.currentStep - 1];
+      nextElement.classList.add(ACTIVE_CLASS);
+      currentElement.classList.remove(ACTIVE_CLASS);
 
       setInfo((p) => ({
         ...p,
-        text: info.elements?.[info.currentStep]?.dataset?.rhText || "",
+        text: nextElement?.dataset?.rhText || "",
         currentStep: p.currentStep + 1,
         active: false,
       }));
     };
     const handlePrev = () => {
       if (info.currentStep === 1) return;
+      const currentElement = info.elements[info.currentStep - 1];
+      const prevElement = info.elements[info.currentStep - 2];
+      currentElement.classList.remove(ACTIVE_CLASS);
+      prevElement.classList.add(ACTIVE_CLASS);
 
       setInfo((p) => ({
         ...p,
-        text: info.elements?.[info.currentStep - 2]?.dataset?.rhText || "",
+        text: p.elements?.[p.currentStep - 2]?.dataset?.rhText || "",
         currentStep: p.currentStep - 1,
       }));
     };
@@ -85,19 +98,29 @@ export const ReactHinter: FC<ReactHinterProps> = memo(
         const elems = document.querySelectorAll(
           `[data-rh-namespace='${namespace}']`,
         );
+        if (!elems) {
+          onEnd();
+          return console.error("REACT_HINTER: Cannot find elements");
+        }
+        const parsedElems = ([...elems] as HTMLElement[]).sort((i, b) =>
+          i.dataset?.rhStep &&
+          b.dataset?.rhStep &&
+          +i.dataset?.rhStep < +b.dataset?.rhStep
+            ? -1
+            : 1,
+        );
 
-        if (!elems) return console.error("REACT_HINTER: Cannot find elements");
-
-        const parsedElems = [...elems] as HTMLElement[];
         const firstElement = parsedElems.find(
           (item) => (item as HTMLElement)?.dataset?.rhStep?.toString() === "1",
         );
-
-        if (!firstElement)
+        if (!firstElement) {
+          onEnd();
           return console.error(
             "REACT_HINTER: You didnt provide the first step",
           );
+        }
 
+        firstElement.classList.add(ACTIVE_CLASS);
         setInfo((p) => ({
           ...p,
           steps: elems.length,
@@ -114,7 +137,6 @@ export const ReactHinter: FC<ReactHinterProps> = memo(
     }, [info.currentStep, ref]);
 
     if (!namespace) return null;
-
     return (
       <Portal wrapperId="__REACT_HINTER_PORTAL__">
         <div

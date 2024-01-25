@@ -1,6 +1,5 @@
 .react-hinter-wrapper {
     transition: 0.5s opacity ease, 0.5s top ease, 0.5s left ease;
-    opacity: 0;
     border-radius: 10px;
     width: 300px;
     z-index: -100;
@@ -8,6 +7,9 @@
     position: absolute;
     background: #535bf2;
     padding: 12px;
+    top: 0;
+    left: 0;
+    opacity: 0;
 }
 
 .react-hinter-wrapper.react-hinter-active__true {
@@ -31,6 +33,11 @@
 
 .react-hinter-content-footer button {
     width: 100%;
+}
+
+.react-hinter-active-element {
+    transition: 0.4s all ease;
+    box-shadow: 0 0 5px #535bf2;
 }
 
 

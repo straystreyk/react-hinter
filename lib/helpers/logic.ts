@@ -5,9 +5,9 @@ export const renderHinterPos = (
   element: HTMLElement,
   hinterElement: HTMLDivElement,
 ) => {
-  const { left, top, bottom } = element.getBoundingClientRect();
+  const { left } = element.getBoundingClientRect();
   let leftToUse = left + element.offsetWidth / 2;
-  let topToUse = bottom + OFFSET;
+  let topToUse = element.offsetTop + OFFSET + element.offsetHeight;
 
   const preferredPos = element.dataset?.rhPreferredPosition || "bottom";
   const hinterHeight = hinterElement.offsetHeight;
@@ -21,15 +21,15 @@ export const renderHinterPos = (
   }
 
   if (preferredPos === "bottom") {
-    const range = window.innerHeight - hinterHeight - bottom;
+    const range = window.innerHeight - hinterHeight - topToUse;
     // если указали bottom а нет места на отрисовку внизу
-    if (range < DEAD_LINE) topToUse = top - hinterHeight - OFFSET;
+    if (range < DEAD_LINE) topToUse = element.offsetTop - hinterHeight - OFFSET;
   }
 
   if (preferredPos === "top") {
-    const range = top - hinterHeight - OFFSET;
+    const range = element.offsetTop - hinterHeight - OFFSET;
     // если указали top а нет места на отрисовку внизу
-    if (range > DEAD_LINE) topToUse = top - hinterHeight - OFFSET;
+    if (range > DEAD_LINE) topToUse = element.offsetTop - hinterHeight - OFFSET;
   }
 
   return {
