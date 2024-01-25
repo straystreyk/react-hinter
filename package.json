@@ -1,5 +1,6 @@
 {
   "name": "react-hinter",
+  "description": "React hinter component",
   "version": "0.1.21",
   "type": "module",
   "main": "./dist/main.cjs",
@@ -7,6 +8,10 @@
   "files": [
     "dist"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/straystreyk/react-hinter.git"
+  },
   "types": "dist/main.d.ts",
   "exports": {
     ".": {
@@ -57,8 +62,5 @@
     "typescript": "^5.2.2",
     "vite": "^5.0.8",
     "vite-plugin-static-copy": "^1.0.1"
-  },
-  "dependencies": {
-    "vite-plugin-css-injected-by-js": "^3.3.1"
   }
 }
