@@ -1,29 +1,26 @@
 import { useState } from "react";
 import { ReactHinter } from "../lib/main";
-
-import "../lib/styles/glob.css";
+import "../dist/css/style.css";
 
 function App() {
   const [active, setActive] = useState(false);
 
   return (
     <>
-      <button onClick={() => setActive(true)}>start</button>
       <button
-        data-rh-text="2"
         data-rh-namespace="namespace"
         data-rh-step={1}
-        data-rh-preferred-position="top"
+        data-rh-text="Text for hinter step 1"
       >
-        Я СТИКИ
+        Step 1
       </button>
+
       <button
-        data-rh-text="4"
         data-rh-namespace="namespace"
         data-rh-step={2}
-        data-rh-preferred-position="top"
+        data-rh-text="Text for hinter step 2"
       >
-        Я АБСОЛЮТНЫЙ ВНУТРИ НЕ АБСОЛЮТНОГО
+        Step 2
       </button>
 
       <ReactHinter

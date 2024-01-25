@@ -1,30 +1,91 @@
-# React + TypeScript + Vite
+[![Version](http://img.shields.io/npm/v/react-hinter.svg)](https://www.npmjs.org/package/react-hinter)
+![typescript](https://badgen.net/badge/icon/typescript?icon=typescript&label)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Installation
+```sh
+npm install react-hinter
+```
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
+## Usage
+1 . Import the ReactHinter component and default styles for it. It's important to import default styles, hinter won't show without it.
 ```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
+import { ReactHinter } from "react-hinter";
+import "react-hinter/dist/css/style.css";
+```
+
+2 . Select the elements that ReactHinter will point to. 
+Specify the required data-attributes as in the example below. 
+**Mandatory data-attributes** are **data-rh-namespace** -
+the namespace in which ReactHinter elements will be defined,
+**data-rh-step** - the counting order that ReactHinter will point to, 
+**data-text** - the text that ReactHinter will draw.
+
+```jsx
+return (
+    <>
+      <button
+        data-rh-namespace="namespace"
+        data-rh-step={1}
+        data-rh-text="Text for hinter step 1"
+      >
+        Step 1
+      </button>
+
+      <button
+        data-rh-namespace="namespace"
+        data-rh-step={2}
+        data-rh-text="Text for hinter step 2"
+      >
+        Step 2
+      </button>
+    </>
+);
+```
+
+ 3 . Define a React Hinter component with required parameters. namespace - the same as data-namespace for elements, active - boolean state, onEnd - ReactHinter end events.
+ 
+```jsx
+ <ReactHinter
+    namespace="namespace"
+    active={active}
+    onEnd={() => setActive(false)}
+/>
+```
+
+## Full example
+
+```jsx
+function App() {
+    const [active, setActive] = useState(false);
+
+    return (
+        <>
+            <button
+                data-rh-namespace="namespace"
+                data-rh-step={1}
+                data-rh-text="Text for hinter step 1"
+            >
+                Step 1
+            </button>
+
+            <button
+                data-rh-namespace="namespace"
+                data-rh-step={2}
+                data-rh-text="Text for hinter step 2"
+            >
+                Step 2
+            </button>
+
+            <ReactHinter
+                namespace="namespace"
+                active={active}
+                onEnd={() => setActive(false)}
+            />
+        </>
+    );
 }
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+
+## License
+ISC
