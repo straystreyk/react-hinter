@@ -1,7 +1,7 @@
 import { ReactHinter } from "../dist/main.js";
 import { useState } from "react";
 
-import "../dist/assets/style.css";
+import "../dist/css/style.css";
 
 function App() {
   const [active, setActive] = useState(false);

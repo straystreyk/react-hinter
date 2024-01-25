@@ -7,17 +7,18 @@
   "files": [
     "dist"
   ],
+  "types": "dist/main.d.ts",
   "exports": {
     ".": {
+      "types": "./dist/main.d.ts",
       "import": "./dist/main.js",
-      "require": "./dist/main.cjs"
+      "require": "./dist/main.cjs",
+      "default": "./dist/main.cjs"
     },
-    "./dist/main.css": {
-      "import": "./dist/main.css",
-      "require": "./dist/main.css"
-    }
+    "./dist/css/main.css": "./dist/css/main.css",
+    "./dist/main.d.ts": "./dist/main.d.ts",
+    "./package.json": "./package.json"
   },
-  "types": "dist/main.d.ts",
   "license": "ISC",
   "contributors": [
     {
