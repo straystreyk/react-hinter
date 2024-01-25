@@ -3,9 +3,21 @@ import react from "@vitejs/plugin-react";
 import { resolve } from "path";
 import { moveDTSPlugin } from "./plugins/moveDTSPlugin";
 import { generateAssetsBuildPaths } from "./plugins/generateAssets";
+import { viteStaticCopy } from "vite-plugin-static-copy";
 
 export default defineConfig({
-  plugins: [react(), moveDTSPlugin()],
+  plugins: [
+    react(),
+    moveDTSPlugin(),
+    viteStaticCopy({
+      targets: [
+        {
+          src: "README.md",
+          dest: "./",
+        },
+      ],
+    }),
+  ],
   build: {
     copyPublicDir: false,
     ssr: true,
