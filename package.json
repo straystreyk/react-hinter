@@ -15,7 +15,7 @@
       "require": "./dist/main.cjs",
       "default": "./dist/main.cjs"
     },
-    "./dist/css/main.css": "./dist/css/main.css",
+    "./dist/css/style.css": "./dist/css/style.css",
     "./dist/main.d.ts": "./dist/main.d.ts",
     "./package.json": "./package.json"
   },
