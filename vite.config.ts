@@ -3,9 +3,10 @@ import react from "@vitejs/plugin-react";
 import { resolve } from "path";
 import { moveDTSPlugin } from "./plugins/moveDTSPlugin";
 import { generateAssetsBuildPaths } from "./plugins/generateAssets";
+import { libInjectCss } from "vite-plugin-lib-inject-css";
 
 export default defineConfig({
-  plugins: [react(), moveDTSPlugin()],
+  plugins: [react(), moveDTSPlugin(), libInjectCss()],
   build: {
     copyPublicDir: false,
     ssr: true,
