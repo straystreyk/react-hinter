@@ -4,6 +4,9 @@
 If you like the project, please give the project a GitHub 🌟
 ---------------
 
+![Intro](https://raw.githubusercontent.com/straystreyk/react-hinter/CustomBranch/public/intro.gif)
+
+
 React component for showing information hints 🥸<br/>
 🎨 Easy to customize<br/>
 💨 Lightweight
