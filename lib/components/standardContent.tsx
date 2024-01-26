@@ -1,7 +1,7 @@
-import { IContentProps } from "../@types/common";
+import { ReactHinterContentProps } from "../@types/common";
 import { FC } from "react";
 
-export const StandardContent: FC<IContentProps> = (info) => {
+export const StandardContent: FC<ReactHinterContentProps> = (info) => {
   return (
     <div>
       <div className="react-hinter-content-header">
