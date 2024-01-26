@@ -1,43 +1,49 @@
 .react-hinter-wrapper {
-    transition: 0.5s opacity ease, 0.5s top ease, 0.5s left ease;
-    border-radius: 10px;
-    width: 300px;
-    z-index: -100;
-    transform: translateX(-50%);
-    position: absolute;
-    background: #535bf2;
-    padding: 12px;
-    top: 0;
-    left: 0;
-    opacity: 0;
+  transition: 0.5s opacity ease;
+  pointer-events: none;
+  border-radius: 10px;
+  width: 300px;
+  z-index: -100;
+  transform: translateX(-50%);
+  position: absolute;
+  background: #535bf2;
+  padding: 12px;
+  top: 0;
+  left: 0;
+  opacity: 0;
+}
+
+.react-hinter-is-first-step-active__true {
+  transition:
+    0.5s opacity ease,
+    0.5s top ease,
+    0.5s left ease;
+  pointer-events: all;
 }
 
 .react-hinter-wrapper.react-hinter-active__true {
-    opacity: 1;
-    pointer-events: all;
-    z-index: 100;
+  opacity: 1;
+  z-index: 100;
 }
 
 .react-hinter-content-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
 }
 
 .react-hinter-content-footer {
-    display: flex;
-    gap: 4px;
-    margin-top: 8px;
+  display: flex;
+  gap: 4px;
+  margin-top: 8px;
 }
 
 .react-hinter-content-footer button {
-    width: 100%;
+  width: 100%;
 }
 
 .react-hinter-active-element {
-    transition: 0.4s all ease;
-    box-shadow: 0 0 5px #535bf2;
+  transition: 0.4s all ease;
+  box-shadow: 0 0 5px #535bf2;
 }
-
-

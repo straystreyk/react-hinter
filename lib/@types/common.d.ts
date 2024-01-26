@@ -2,7 +2,7 @@ import React, { AriaAttributes, DOMAttributes, FC, ReactNode } from "react";
 
 type PlacesType = "top" | "bottom";
 
-interface IContentProps {
+interface ReactHinterContentProps {
   steps: number;
   currentStep: number;
   text: string | ReactNode;
@@ -32,4 +32,4 @@ declare module "react" {
   }
 }
 
-export { ReactHinter, ReactHinterProps, IContentProps };
+export { ReactHinter, ReactHinterProps, ReactHinterContentProps };

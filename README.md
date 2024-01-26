@@ -1,6 +1,14 @@
 [![Version](http://img.shields.io/npm/v/react-hinter.svg)](https://www.npmjs.org/package/react-hinter)
 ![typescript](https://badgen.net/badge/icon/typescript?icon=typescript&label)
 
+If you like the project, please give the project a GitHub 🌟
+---------------
+
+React component for showing information hints 🥸<br/>
+🎨 Easy to customize<br/>
+💨 Lightweight
+
+
 ## Installation
 ```sh
 npm install react-hinter

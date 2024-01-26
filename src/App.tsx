@@ -1,34 +1,62 @@
 import { useState } from "react";
 import { ReactHinter } from "../lib/main";
-import "../dist/css/style.css";
+import "../lib/styles/glob.css";
 
 function App() {
   const [active, setActive] = useState(false);
 
   return (
-    <>
-      <button
-        data-rh-namespace="namespace"
-        data-rh-step={1}
-        data-rh-text="Text for hinter step 1"
+    <div
+      style={{
+        display: "flex",
+        gap: "12px",
+        width: "auto",
+        flexDirection: "column",
+      }}
+    >
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          marginBottom: 100,
+          marginTop: 300,
+        }}
       >
-        Step 1
-      </button>
+        <button onClick={() => setActive(true)}>Show the recipe</button>
+      </div>
+      <div style={{ display: "flex", gap: 5, marginTop: 50, marginLeft: 500 }}>
+        <button
+          data-rh-namespace="scrable"
+          data-rh-step={1}
+          data-rh-text="Take 2 eggs and beat them!"
+          data-rh-preferred-position="top"
+        >
+          Step 1: Take eggs
+        </button>
 
-      <button
-        data-rh-namespace="namespace"
-        data-rh-step={2}
-        data-rh-text="Text for hinter step 2"
-      >
-        Step 2
-      </button>
+        <button
+          data-rh-namespace="scrable"
+          data-rh-step={3}
+          data-rh-text="Enjoy your meal :)"
+        >
+          Step 3: Enjoy
+        </button>
+        <button
+          data-rh-namespace="scrable"
+          data-rh-step={2}
+          data-rh-text="Take a pen and heat it well!"
+          data-rh-preferred-position="top"
+        >
+          Step 2: Take a pan
+        </button>
+      </div>
 
       <ReactHinter
-        namespace="namespace"
+        namespace="scrable"
         active={active}
         onEnd={() => setActive(false)}
       />
-    </>
+    </div>
   );
 }
 

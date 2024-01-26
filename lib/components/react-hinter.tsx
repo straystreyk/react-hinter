@@ -9,13 +9,13 @@ import {
   useState,
   TransitionEvent,
 } from "react";
-import { IContentProps, ReactHinterProps } from "../@types/common";
+import { ReactHinterContentProps, ReactHinterProps } from "../@types/common";
 import { renderHinterPos } from "../helpers/logic.ts";
 import { StandardContent } from "./standardContent.tsx";
 import { canUseDOM } from "../helpers/common.ts";
 
 const initialState: Pick<
-  IContentProps,
+  ReactHinterContentProps,
   "steps" | "currentStep" | "text" | "elements" | "position"
 > = {
   steps: 0,
@@ -31,26 +31,35 @@ export const ReactHinter: FC<ReactHinterProps> = memo(
   ({ active, namespace, onEnd, content: Content, className }) => {
     const ref = useRef<HTMLDivElement>(null);
     const [info, setInfo] = useState(initialState);
+    const {
+      elements,
+      steps: infoSteps,
+      currentStep,
+      position: { left, top },
+    } = info;
+    const [steps, setSteps] = useState<number[]>([]);
+
+    const isFirstStepActive = steps.includes(1);
 
     const renderPosition = useCallback(() => {
       if (!ref.current || !canUseDOM()) return;
 
-      const currentElement = info.elements?.find(
+      const currentElement = elements?.find(
         (item) =>
           (item as HTMLElement)?.dataset?.rhStep?.toString() ===
-          info.currentStep.toString(),
+          currentStep.toString(),
       );
       if (!currentElement) return;
 
       const { left, top } = renderHinterPos(currentElement, ref.current);
       setInfo((p) => ({ ...p, position: { left, top } }));
-    }, [info]);
+    }, [currentStep, elements]);
 
     const handleFinish = () => {
       onEnd();
-      const currentElement = info.elements[info.currentStep - 1];
-      currentElement.classList.remove(ACTIVE_CLASS);
+      elements.forEach((el) => el.classList.remove(ACTIVE_CLASS));
 
+      setSteps([]);
       setInfo((p) => ({
         ...initialState,
         text: p.text,
@@ -62,13 +71,17 @@ export const ReactHinter: FC<ReactHinterProps> = memo(
 
     const onTransitionEnd = (e: TransitionEvent<HTMLDivElement>) => {
       if (e.target !== e.currentTarget) return;
+
+      if (active && (currentStep === 1 || infoSteps === currentStep))
+        setSteps((p) => [...p, currentStep]);
+
       !active && setInfo(initialState);
     };
 
     const handleNext = () => {
-      if (info.currentStep === info.steps) return handleFinish();
-      const nextElement = info.elements[info.currentStep];
-      const currentElement = info.elements[info.currentStep - 1];
+      if (currentStep === infoSteps) return handleFinish();
+      const nextElement = elements[currentStep];
+      const currentElement = elements[currentStep - 1];
       nextElement.classList.add(ACTIVE_CLASS);
       currentElement.classList.remove(ACTIVE_CLASS);
 
@@ -80,9 +93,9 @@ export const ReactHinter: FC<ReactHinterProps> = memo(
       }));
     };
     const handlePrev = () => {
-      if (info.currentStep === 1) return;
-      const currentElement = info.elements[info.currentStep - 1];
-      const prevElement = info.elements[info.currentStep - 2];
+      if (currentStep === 1) return;
+      const currentElement = elements[currentStep - 1];
+      const prevElement = elements[currentStep - 2];
       currentElement.classList.remove(ACTIVE_CLASS);
       prevElement.classList.add(ACTIVE_CLASS);
 
@@ -129,12 +142,12 @@ export const ReactHinter: FC<ReactHinterProps> = memo(
           elements: parsedElems,
         }));
       }
-    }, [namespace, active]);
+    }, [namespace, active, onEnd]);
 
     useEffect(() => {
-      if (!ref.current || !info.elements.length || !canUseDOM()) return;
+      if (!ref.current || !elements.length || !canUseDOM()) return;
       renderPosition();
-    }, [info.currentStep, ref]);
+    }, [currentStep, elements.length, ref, renderPosition]);
 
     if (!namespace) return null;
     return (
@@ -142,8 +155,16 @@ export const ReactHinter: FC<ReactHinterProps> = memo(
         <div
           ref={ref}
           onTransitionEnd={onTransitionEnd}
-          style={{ top: info.position.top, left: info.position.left }}
-          className={`react-hinter-wrapper ${className || ""} react-hinter-namespace__${namespace} react-hinter-active__${active} react-hinter-step__${info.currentStep} react-hinter-is-last-step__${info.steps > 0 && info.currentStep === info.steps}`}
+          style={{ top, left }}
+          className={`
+          react-hinter-wrapper 
+          ${className || ""} 
+          react-hinter-namespace__${namespace} 
+          react-hinter-active__${active} 
+          react-hinter-step__${currentStep} 
+          react-hinter-is-first-step-active__${isFirstStepActive}
+          react-hinter-is-last-step__${infoSteps > 0 && currentStep === infoSteps}
+          `}
         >
           {Content ? (
             <Content
