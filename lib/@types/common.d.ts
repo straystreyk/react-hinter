@@ -17,7 +17,7 @@ interface ReactHinterProps {
   active: boolean;
   namespace: string;
   onEnd: () => void;
-  content?: FC<IContentProps>;
+  content?: FC<ReactHinterContentProps>;
   className?: string;
 }
 
