@@ -1,5 +1,4 @@
 import React, { AriaAttributes, DOMAttributes, FC, ReactNode } from "react";
-import { ReactHinterProps } from "../../dist/main";
 
 type PlacesType = "top" | "bottom";
 
