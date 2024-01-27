@@ -1,11 +1,11 @@
-import React, { AriaAttributes, DOMAttributes, FC, ReactNode } from "react";
+import React, { AriaAttributes, DOMAttributes, FC } from "react";
 
-type PlacesType = "top" | "bottom";
+type ReactHinterPlacesType = "top" | "bottom";
 
 interface ReactHinterContentProps {
   steps: number;
   currentStep: number;
-  text: string | ReactNode;
+  text: string;
   elements: HTMLElement[];
   position: { left?: number; top?: number };
   nextStep: () => void;
@@ -26,10 +26,15 @@ declare const ReactHinter: (props: ReactHinterProps) => React.JSX.Element;
 declare module "react" {
   interface HTMLAttributes<T> extends AriaAttributes, DOMAttributes<T> {
     "data-rh-namespace"?: string;
-    "data-rh-preferred-position"?: PlacesType;
+    "data-rh-preferred-position"?: ReactHinterPlacesType;
     "data-rh-text"?: string;
     "data-rh-step"?: number;
   }
 }
 
-export { ReactHinter, ReactHinterProps, ReactHinterContentProps };
+export {
+  ReactHinter,
+  ReactHinterProps,
+  ReactHinterContentProps,
+  ReactHinterPlacesType,
+};

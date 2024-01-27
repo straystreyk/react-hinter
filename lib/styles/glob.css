@@ -1,6 +1,5 @@
 .react-hinter-wrapper {
   transition: 0.5s opacity ease;
-  pointer-events: none;
   border-radius: 10px;
   width: 300px;
   z-index: -100;
@@ -11,14 +10,18 @@
   top: 0;
   left: 0;
   opacity: 0;
-}
 
-.react-hinter-is-first-step-active__true {
-  transition:
-    0.5s opacity ease,
-    0.5s top ease,
-    0.5s left ease;
-  pointer-events: all;
+  &.react-hinter-has-transition__true {
+    pointer-events: none;
+  }
+
+  &.react-hinter-is-first-step-transition-end__true {
+    transition:
+      0.5s opacity ease,
+      0.5s top ease,
+      0.5s left ease;
+    pointer-events: all;
+  }
 }
 
 .react-hinter-wrapper.react-hinter-active__true {

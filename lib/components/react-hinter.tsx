@@ -17,12 +17,13 @@ import { canUseDOM } from "../helpers/common.ts";
 const initialState: Pick<
   ReactHinterContentProps,
   "steps" | "currentStep" | "text" | "elements" | "position"
-> = {
+> & { hasTransition: boolean } = {
   steps: 0,
   currentStep: 0,
   text: "",
   elements: [],
   position: { left: undefined, top: undefined },
+  hasTransition: true,
 };
 
 const ACTIVE_CLASS = "react-hinter-active-element";
@@ -32,6 +33,7 @@ export const ReactHinter: FC<ReactHinterProps> = memo(
     const ref = useRef<HTMLDivElement>(null);
     const [info, setInfo] = useState(initialState);
     const {
+      hasTransition,
       elements,
       steps: infoSteps,
       currentStep,
@@ -60,6 +62,8 @@ export const ReactHinter: FC<ReactHinterProps> = memo(
       elements.forEach((el) => el.classList.remove(ACTIVE_CLASS));
 
       setSteps([]);
+
+      if (!hasTransition) return setInfo(initialState);
       setInfo((p) => ({
         ...initialState,
         text: p.text,
@@ -140,6 +144,11 @@ export const ReactHinter: FC<ReactHinterProps> = memo(
           currentStep: 1,
           text: firstElement.dataset?.rhText || "",
           elements: parsedElems,
+          hasTransition: ref.current
+            ? !!window
+                .getComputedStyle(ref.current, null)
+                .getPropertyValue("transition-duration")
+            : false,
         }));
       }
     }, [namespace, active, onEnd]);
@@ -159,10 +168,11 @@ export const ReactHinter: FC<ReactHinterProps> = memo(
           className={`
           react-hinter-wrapper 
           ${className || ""} 
+          react-hinter-has-transition__${hasTransition}
           react-hinter-namespace__${namespace} 
           react-hinter-active__${active} 
           react-hinter-step__${currentStep} 
-          react-hinter-is-first-step-active__${isFirstStepActive}
+          react-hinter-is-first-step-transition-end__${isFirstStepActive}
           react-hinter-is-last-step__${infoSteps > 0 && currentStep === infoSteps}
           `}
         >

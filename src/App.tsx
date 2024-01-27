@@ -26,7 +26,7 @@ function App() {
       </div>
       <div style={{ display: "flex", gap: 5, marginTop: 50, marginLeft: 500 }}>
         <button
-          data-rh-namespace="scrable"
+          data-rh-namespace="scramble"
           data-rh-step={1}
           data-rh-text="Take 2 eggs and beat them!"
           data-rh-preferred-position="top"
@@ -35,14 +35,14 @@ function App() {
         </button>
 
         <button
-          data-rh-namespace="scrable"
+          data-rh-namespace="scramble"
           data-rh-step={3}
           data-rh-text="Enjoy your meal :)"
         >
           Step 3: Enjoy
         </button>
         <button
-          data-rh-namespace="scrable"
+          data-rh-namespace="scramble"
           data-rh-step={2}
           data-rh-text="Take a pen and heat it well!"
           data-rh-preferred-position="top"
@@ -52,7 +52,7 @@ function App() {
       </div>
 
       <ReactHinter
-        namespace="scrable"
+        namespace="scramble"
         active={active}
         onEnd={() => setActive(false)}
       />
