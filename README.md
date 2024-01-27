@@ -167,6 +167,7 @@ const MainPage = () => {
 | **content**   | FC\<ReactHinterProps\> | false    | undefined | Your custom content component                                                                     |
 | **className** | string                 | false    | undefined | Your className                                                                                    |
 
+
 ## ReactHinterContent props
 | Parameter       | Type                            | About                                                                                 |
 |-----------------|---------------------------------|---------------------------------------------------------------------------------------|
@@ -178,6 +179,7 @@ const MainPage = () => {
 | **nextStep**    | () => void                      | Function to go to next step                                                           |
 | **prevStep**    | () => void                      | Function to go to previous step                                                       |
 | **finish**      | () => void                      | function that terminates ReactHinter                                                  |
+
 
 ## Additional HTMLAttributes
 
