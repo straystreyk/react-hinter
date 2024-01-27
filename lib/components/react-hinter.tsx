@@ -145,9 +145,11 @@ export const ReactHinter: FC<ReactHinterProps> = memo(
           text: firstElement.dataset?.rhText || "",
           elements: parsedElems,
           hasTransition: ref.current
-            ? !!window
-                .getComputedStyle(ref.current, null)
-                .getPropertyValue("transition-duration")
+            ? !!parseInt(
+                window
+                  .getComputedStyle(ref.current, null)
+                  .getPropertyValue("transition-duration"),
+              )
             : false,
         }));
       }
