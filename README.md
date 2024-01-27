@@ -163,7 +163,7 @@ const MainPage = () => {
 |---------------|------------------------|----------|-----------|---------------------------------------------------------------------------------------------------|
 | **active**    | boolean                | true     | false     | Active state of ReactHinter                                                                       |
 | **namespace** | string                 | true     | –         | Namespace in which ReactHinter will navigate                                                      |
-| **onEnd**     | string                 | true     | –         | An event that fires when ReactHinter terminates. Here you should set the activity status to false |
+| **onEnd**     | () => void             | true     | –         | An event that fires when ReactHinter terminates. Here you should set the activity status to false |
 | **content**   | FC\<ReactHinterProps\> | false    | undefined | Your custom content component                                                                     |
 | **className** | string                 | false    | undefined | Your className                                                                                    |
 
