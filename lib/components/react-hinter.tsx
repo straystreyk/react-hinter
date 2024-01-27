@@ -45,13 +45,7 @@ export const ReactHinter: FC<ReactHinterProps> = memo(
 
     const renderPosition = useCallback(() => {
       if (!ref.current || !canUseDOM()) return;
-
-      const currentElement = elements?.find(
-        (item) =>
-          (item as HTMLElement)?.dataset?.rhStep?.toString() ===
-          currentStep.toString(),
-      );
-      if (!currentElement) return;
+      const currentElement = elements[currentStep - 1];
 
       const { left, top } = renderHinterPos(currentElement, ref.current);
       setInfo((p) => ({ ...p, position: { left, top } }));

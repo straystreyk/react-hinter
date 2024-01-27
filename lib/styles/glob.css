@@ -1,7 +1,6 @@
 .react-hinter-wrapper {
   transition: 0.5s opacity ease;
   border-radius: 10px;
-  width: 300px;
   z-index: -100;
   transform: translateX(-50%);
   position: absolute;
