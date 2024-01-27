@@ -3,6 +3,7 @@
   border-radius: 10px;
   z-index: -100;
   transform: translateX(-50%);
+  width: 300px;
   position: absolute;
   background: #535bf2;
   padding: 12px;

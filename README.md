@@ -1,4 +1,5 @@
 [![Version](http://img.shields.io/npm/v/react-hinter.svg)](https://www.npmjs.org/package/react-hinter)
+[![Version](https://img.shields.io/npm/dt/react-hinter.svg)](https://www.npmjs.org/package/react-hinter)
 ![typescript](https://badgen.net/badge/icon/typescript?icon=typescript&label)
 
 If you like the project, please give the project a GitHub 🌟
@@ -106,10 +107,10 @@ exactly the same parameters for rendering as React Hinter.
 import { ReactHinter, ReactHinterContentProps } from "react-hinter";
 import "react-hinter/dist/css/style.css";
 
-const MyAwesomeContent:FC<ReactHinterContentProps> = ({ prevStep, nextStep, finish }) => {
+const MyAwesomeContent:FC<ReactHinterContentProps> = ({ prevStep, nextStep, finish, text }) => {
     return (
         <div>
-            My awesome content!
+            {text}
             <button onClick={nextStep}>Next step</button>
             <button onClick={prevStep}>Prev step</button>
             <button onClick={finish}>Finish</button>
