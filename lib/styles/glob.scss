@@ -1,5 +1,4 @@
 .react-hinter-wrapper {
-  transition: 0.5s opacity ease;
   border-radius: 10px;
   z-index: -100;
   transform: translateX(-50%);
@@ -21,6 +20,16 @@
       0.5s top ease,
       0.5s left ease;
     pointer-events: all;
+  }
+
+  @media (max-width: 1024px) {
+    width: unset;
+    bottom: 10px;
+    left: 10px;
+    right: 10px;
+    position: fixed;
+    transform: unset;
+    top: unset;
   }
 }
 
@@ -48,5 +57,5 @@
 
 .react-hinter-active-element {
   transition: 0.4s all ease;
-  box-shadow: 0 0 5px #535bf2;
+  box-shadow: 0 0 20px 10px #535bf2;
 }

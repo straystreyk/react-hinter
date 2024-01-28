@@ -1,4 +1,4 @@
-import "../styles/glob.css";
+import "../styles/glob.scss";
 import { Portal } from "./portal.tsx";
 import { FC, memo, useEffect, useRef, useState, TransitionEvent } from "react";
 import { ReactHinterContentProps, ReactHinterProps } from "../@types/common";
@@ -26,7 +26,7 @@ export const ReactHinter: FC<ReactHinterProps> = memo(
   ({ active, namespace, onEnd, content: Content, className }) => {
     const ref = useRef<HTMLDivElement>(null);
     const [info, setInfo] = useState(initialState);
-    useRenderPosition({ ref, setInfo, info });
+    const { renderPositionStopped } = useRenderPosition({ ref, setInfo, info });
     const [steps, setSteps] = useState<number[]>([]);
     const isFirstStepActive = steps.includes(1);
 
@@ -142,7 +142,7 @@ export const ReactHinter: FC<ReactHinterProps> = memo(
         <div
           ref={ref}
           onTransitionEnd={onTransitionEnd}
-          style={{ top, left }}
+          style={!renderPositionStopped ? { top, left } : {}}
           className={`
           react-hinter-wrapper 
           ${className || ""} 

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { ReactHinter } from "../lib/main";
-import "../lib/styles/glob.css";
+import "../lib/styles/glob.scss";
 
 function App() {
   const [active, setActive] = useState(false);
