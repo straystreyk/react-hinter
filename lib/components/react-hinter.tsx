@@ -1,23 +1,17 @@
 import "../styles/glob.css";
 import { Portal } from "./portal.tsx";
-import {
-  FC,
-  memo,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-  TransitionEvent,
-} from "react";
+import { FC, memo, useEffect, useRef, useState, TransitionEvent } from "react";
 import { ReactHinterContentProps, ReactHinterProps } from "../@types/common";
-import { renderHinterPos } from "../helpers/logic.ts";
 import { StandardContent } from "./standardContent.tsx";
 import { canUseDOM } from "../helpers/common.ts";
+import { useRenderPosition } from "../logic/useRenderPosition.ts";
 
-const initialState: Pick<
+export type TState = Pick<
   ReactHinterContentProps,
   "steps" | "currentStep" | "text" | "elements" | "position"
-> & { hasTransition: boolean } = {
+> & { hasTransition: boolean };
+
+const initialState: TState = {
   steps: 0,
   currentStep: 0,
   text: "",
@@ -32,6 +26,10 @@ export const ReactHinter: FC<ReactHinterProps> = memo(
   ({ active, namespace, onEnd, content: Content, className }) => {
     const ref = useRef<HTMLDivElement>(null);
     const [info, setInfo] = useState(initialState);
+    useRenderPosition({ ref, setInfo, info });
+    const [steps, setSteps] = useState<number[]>([]);
+    const isFirstStepActive = steps.includes(1);
+
     const {
       hasTransition,
       elements,
@@ -39,17 +37,6 @@ export const ReactHinter: FC<ReactHinterProps> = memo(
       currentStep,
       position: { left, top },
     } = info;
-    const [steps, setSteps] = useState<number[]>([]);
-
-    const isFirstStepActive = steps.includes(1);
-
-    const renderPosition = useCallback(() => {
-      if (!ref.current || !canUseDOM()) return;
-      const currentElement = elements[currentStep - 1];
-
-      const { left, top } = renderHinterPos(currentElement, ref.current);
-      setInfo((p) => ({ ...p, position: { left, top } }));
-    }, [currentStep, elements]);
 
     const handleFinish = () => {
       onEnd();
@@ -148,11 +135,6 @@ export const ReactHinter: FC<ReactHinterProps> = memo(
         }));
       }
     }, [namespace, active, onEnd]);
-
-    useEffect(() => {
-      if (!ref.current || !elements.length || !canUseDOM()) return;
-      renderPosition();
-    }, [currentStep, elements.length, ref, renderPosition]);
 
     if (!namespace) return null;
     return (
