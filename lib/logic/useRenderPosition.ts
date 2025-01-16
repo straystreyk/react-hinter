@@ -14,7 +14,7 @@ import { useMediaQuery } from "./useMatchMedia.ts";
 
 export const useRenderPosition: (opts: {
   info: TState;
-  ref: RefObject<HTMLDivElement>;
+  ref: RefObject<HTMLDivElement | null>;
   setInfo: Dispatch<SetStateAction<TState>>;
 }) => { renderPositionStopped: boolean } = ({
   ref,
