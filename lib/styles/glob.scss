@@ -10,17 +10,13 @@
   top: 0;
   left: 0;
   opacity: 0;
-
-  &.react-hinter-has-transition__true {
-    pointer-events: none;
-  }
+  pointer-events: none;
 
   &.react-hinter-is-first-step-transition-end__true {
     transition:
       0.5s opacity ease,
       0.5s top ease,
       0.5s left ease;
-    pointer-events: all;
   }
 
   @media (max-width: 1024px) {
@@ -37,6 +33,7 @@
 .react-hinter-wrapper.react-hinter-active__true {
   opacity: 1;
   z-index: 100;
+  pointer-events: all;
 }
 
 .react-hinter-content-header {

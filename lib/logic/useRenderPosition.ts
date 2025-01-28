@@ -4,6 +4,7 @@ import {
   SetStateAction,
   useCallback,
   useEffect,
+  useMemo,
   useRef,
 } from "react";
 import debounce from "lodash.debounce";
@@ -32,12 +33,12 @@ export const useRenderPosition: (opts: {
     setInfo((p) => ({ ...p, position: { left, top } }));
   }, [currentStep, elements, isTabletOrMobile, ref, setInfo]);
 
-  const debouncedRenderPosition = useCallback(
+  const debouncedRenderPosition = useMemo(
     () => debounce(renderPosition, 100),
     [renderPosition],
   );
 
-  const refToRenderPosition = useRef(debouncedRenderPosition());
+  const refToRenderPosition = useRef(debouncedRenderPosition);
 
   useEffect(() => {
     const handleResize = () => {
@@ -53,7 +54,7 @@ export const useRenderPosition: (opts: {
   useEffect(() => {
     if (!ref.current || !elements.length || !canUseDOM() || isTabletOrMobile)
       return;
-    refToRenderPosition.current = debouncedRenderPosition();
+    refToRenderPosition.current = debouncedRenderPosition;
     renderPosition();
   }, [
     currentStep,

@@ -9,6 +9,7 @@ const Component: FC<ReactHinterContentProps> = ({ text, finish, nextStep }) => {
     <div>
       <div>
         <button onClick={nextStep}>next</button>
+        <button onClick={finish}>finish</button>
       </div>
       {text} <div onClick={finish}>выйти</div>
     </div>

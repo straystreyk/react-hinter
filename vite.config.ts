@@ -21,12 +21,13 @@ export default defineConfig({
   build: {
     copyPublicDir: false,
     ssr: true,
-    minify: "esbuild",
+    minify: true,
     lib: {
       name: "react-hinter",
       entry: resolve(__dirname, "lib/main.ts"),
       formats: ["cjs", "es"],
     },
+    cssMinify: true,
     rollupOptions: {
       external: ["react", "react-dom"],
       output: {
