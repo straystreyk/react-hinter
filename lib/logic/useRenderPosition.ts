@@ -7,8 +7,7 @@ import {
   useMemo,
   useRef,
 } from "react";
-import debounce from "lodash.debounce";
-import { canUseDOM } from "../helpers/common.ts";
+import { canUseDOM, debounce } from "../helpers/common.ts";
 import { renderHinterPos } from "../helpers/logic.ts";
 import { TState } from "../components/react-hinter.tsx";
 import { useMediaQuery } from "./useMatchMedia.ts";

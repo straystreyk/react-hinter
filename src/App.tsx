@@ -1,128 +1,83 @@
 import { FC, useState } from "react";
 import "../lib/styles/glob.scss";
 
-import "./glob.css";
+import "./glob.scss";
 import { ReactHinter, ReactHinterContentProps } from "../lib/main.ts";
 
 const Component: FC<ReactHinterContentProps> = ({ text, finish, nextStep }) => {
   return (
     <div>
-      <div>
-        <button onClick={nextStep}>next</button>
-        <button onClick={finish}>finish</button>
-      </div>
-      {text} <div onClick={finish}>выйти</div>
+      {text} <button onClick={nextStep}>next</button>
+      {text} <button onClick={finish}>finish</button>
     </div>
   );
 };
 
 function App() {
   const [active, setActive] = useState(false);
-  const [active2, setActive2] = useState(false);
 
   return (
-    <div
-      style={{
-        display: "flex",
-        gap: "12px",
-        width: "auto",
-        flexDirection: "column",
-      }}
-    >
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          marginBottom: 100,
-          marginTop: 300,
-        }}
+    <div>
+      <button onClick={() => setActive(true)}>Show a hint!</button>
+      <button
+        data-rh-namespace="scramble"
+        data-rh-text="hello world"
+        data-rh-step={1}
+        className="custom-icon"
       >
-        <button onClick={() => setActive(true)}>Show the recipe</button>
-      </div>{" "}
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          marginBottom: 100,
-          marginTop: 300,
-        }}
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="32"
+          height="32"
+          viewBox="0 0 32 32"
+        >
+          <path
+            fill="currentColor"
+            d="M16 13.146c-1.573 0-2.854 1.281-2.854 2.854s1.281 2.854 2.854 2.854s2.854-1.281 2.854-2.854s-1.281-2.854-2.854-2.854m-7.99 8.526l-.63-.156C2.692 20.328 0 18.318 0 15.995s2.693-4.333 7.38-5.521l.63-.156l.177.625a31.4 31.4 0 0 0 1.818 4.771l.135.281l-.135.286a31 31 0 0 0-1.818 4.771zm-.921-9.74c-3.563 1-5.75 2.536-5.75 4.063s2.188 3.057 5.75 4.063a33 33 0 0 1 1.578-4.063a33 33 0 0 1-1.578-4.063m16.901 9.74l-.177-.625a31 31 0 0 0-1.818-4.766l-.135-.286l.135-.286a31 31 0 0 0 1.818-4.771l.177-.62l.63.156c4.688 1.188 7.38 3.198 7.38 5.521s-2.693 4.333-7.38 5.521zm-.657-5.677a32.5 32.5 0 0 1 1.578 4.063c3.568-1.005 5.75-2.536 5.75-4.063s-2.188-3.057-5.75-4.063a34 34 0 0 1-1.578 4.063M7.078 11.927l-.177-.625C5.583 6.656 5.984 3.323 8 2.161c1.979-1.141 5.151.208 8.479 3.625l.453.464l-.453.464a31.5 31.5 0 0 0-3.229 3.958l-.182.255l-.313.026a31.6 31.6 0 0 0-5.047.813zm2.531-8.838c-.359 0-.677.073-.943.229c-1.323.766-1.557 3.422-.646 7.005a33 33 0 0 1 4.313-.672a33 33 0 0 1 2.734-3.391c-2.078-2.026-4.047-3.172-5.458-3.172zm12.787 27.145q-.008 0 0 0c-1.901 0-4.344-1.427-6.875-4.031l-.453-.464l.453-.464a31.5 31.5 0 0 0 3.229-3.958l.177-.255l.313-.031a30.7 30.7 0 0 0 5.052-.813l.63-.156l.177.625c1.318 4.646.917 7.974-1.099 9.135a3.1 3.1 0 0 1-1.604.411zm-5.464-4.505c2.078 2.026 4.047 3.172 5.458 3.172h.005c.354 0 .672-.078.938-.229c1.323-.766 1.563-3.422.646-7.005a33 33 0 0 1-4.313.667a33 33 0 0 1-2.734 3.396zm7.99-13.802l-.63-.161a32 32 0 0 0-5.052-.813l-.313-.026l-.177-.255a31.5 31.5 0 0 0-3.229-3.958l-.453-.464l.453-.464c3.328-3.417 6.5-4.766 8.479-3.625c2.016 1.161 2.417 4.495 1.099 9.141zm-5.255-2.276a33 33 0 0 1 4.313.672c.917-3.583.677-6.24-.646-7.005c-1.318-.76-3.797.406-6.401 2.943a34 34 0 0 1 2.734 3.391zM9.609 30.234c-.563.01-1.12-.13-1.609-.411c-2.016-1.161-2.417-4.49-1.099-9.135l.177-.625l.63.156c1.542.391 3.24.661 5.047.813l.313.031l.177.255a31.5 31.5 0 0 0 3.229 3.958l.453.464l-.453.464c-2.526 2.604-4.969 4.031-6.865 4.031zm-1.588-8.567c-.917 3.583-.677 6.24.646 7.005c1.318.75 3.792-.406 6.401-2.943a33 33 0 0 1-2.734-3.396a32.5 32.5 0 0 1-4.313-.667zm7.979.838c-1.099 0-2.224-.047-3.354-.141l-.313-.026l-.182-.26a40 40 0 0 1-1.797-2.828a40 40 0 0 1-1.557-2.969l-.135-.286l.135-.286a40.5 40.5 0 0 1 3.354-5.797l.182-.26l.313-.026a40 40 0 0 1 6.708 0l.313.026l.182.26a40 40 0 0 1 3.354 5.797l.135.286l-.135.286a39.6 39.6 0 0 1-3.354 5.797l-.182.26l-.313.026a41 41 0 0 1-3.354.141m-2.927-1.448c1.969.151 3.885.151 5.859 0a39 39 0 0 0 2.927-5.063a37.5 37.5 0 0 0-2.932-5.063a38 38 0 0 0-5.854 0a37 37 0 0 0-2.932 5.063a38.6 38.6 0 0 0 2.932 5.063"
+          />
+        </svg>
+      </button>
+      <button
+        data-rh-namespace="scramble"
+        data-rh-text="hello world"
+        data-rh-step={2}
+        className="custom-icon"
       >
-        <button onClick={() => setActive2(true)}>Show the recipe 2</button>
-      </div>
-      <div style={{ display: "flex", gap: 5, marginTop: 50, marginLeft: 800 }}>
-        <button
-          data-rh-namespace="scramble"
-          data-rh-step={1}
-          data-rh-text="Take 2 eggs and beat them!"
-          data-rh-preferred-position="bottom"
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="32"
+          height="32"
+          viewBox="0 0 32 32"
         >
-          Step 1: Take eggs
-        </button>
-
-        <button
-          data-rh-namespace="scramble"
-          data-rh-step={2}
-          data-rh-text="Enjoy your meal :)"
-          data-rh-preferred-position="bottom"
-        >
-          Step 2: Enjoy
-        </button>
-        <button
-          data-rh-namespace="scramble"
-          data-rh-step={3}
-          data-rh-text="Take a pen and heat it well!"
-          data-rh-preferred-position="top"
-        >
-          Step 3: Take a pan
-        </button>
-      </div>
-      <div
-        style={{
-          position: "absolute",
-          display: "flex",
-          gap: 5,
-          left: 0,
-          bottom: 0,
-          marginTop: 50,
-          marginLeft: 800,
-        }}
+          <path
+            fill="currentColor"
+            d="M0 0v32h32V0zm23.855 3.855c1.921 0 3.552.588 4.885 1.703l-1.48 2.224c-1.187-.817-2.296-1.333-3.405-1.333c-1.115 0-1.709.516-1.709 1.183v.072c0 .891.595 1.188 2.819 1.781c2.667.74 4.145 1.704 4.145 4v.073c0 2.667-2 4.145-4.812 4.145c-2-.072-4-.812-5.557-2.219l1.703-2.077c1.188.963 2.443 1.629 3.927 1.629c1.183 0 1.849-.443 1.849-1.255v-.079c0-.739-.443-1.109-2.667-1.703c-2.667-.667-4.292-1.407-4.292-4.073v-.077c0-2.443 1.923-4 4.589-4zm-21.486.29h3.037l2 7.709l2.296-7.709h2.224l2.224 7.709l2-7.709h3.109l-3.776 13.261h-2.52l-2.147-7.704l-2.224 7.704H6.149zM3.036 26h12v2h-12z"
+          />
+        </svg>
+      </button>
+      <button
+        data-rh-namespace="scramble"
+        data-rh-text="hello world"
+        data-rh-preferred-position="top"
+        data-rh-step={3}
+        className="custom-icon"
       >
-        <button
-          data-rh-namespace="scramble2"
-          data-rh-step={1}
-          data-rh-text="Take 2 eggs and beat them!"
-          data-rh-preferred-position="bottom"
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="32"
+          height="32"
+          viewBox="0 0 32 32"
         >
-          Step 1: Take eggs
-        </button>
-
-        <button
-          data-rh-namespace="scramble2"
-          data-rh-step={2}
-          data-rh-text="Enjoy your meal :)"
-          data-rh-preferred-position="bottom"
-        >
-          Step 2: Enjoy
-        </button>
-        <button
-          data-rh-namespace="scramble2"
-          data-rh-step={3}
-          data-rh-text="Take a pen and heat it well!"
-          data-rh-preferred-position="top"
-        >
-          Step 3: Take a pan
-        </button>
-      </div>
+          <path
+            fill="currentColor"
+            d="M0 0h32v32H0zm29.38 24.37c-.234-1.464-1.188-2.688-4.005-3.833c-.979-.458-2.073-.781-2.396-1.521c-.12-.438-.141-.677-.063-.938c.203-.865 1.219-1.12 2.021-.88c.521.161 1 .557 1.302 1.198c1.38-.901 1.38-.901 2.339-1.5c-.359-.557-.536-.802-.781-1.036c-.839-.943-1.958-1.422-3.776-1.38l-.943.12c-.901.219-1.76.698-2.281 1.339c-1.516 1.719-1.078 4.719.76 5.964c1.818 1.359 4.479 1.656 4.823 2.938c.318 1.563-1.161 2.063-2.625 1.88c-1.078-.24-1.677-.781-2.339-1.781l-2.438 1.401c.276.641.599.917 1.078 1.479c2.318 2.339 8.12 2.219 9.161-1.339c.036-.12.318-.943.099-2.198zm-11.979-9.662h-2.995c0 2.583-.016 5.151-.016 7.74c0 1.641.083 3.151-.182 3.615c-.443.917-1.573.802-2.089.641c-.526-.26-.797-.62-1.104-1.141c-.089-.141-.151-.26-.172-.26l-2.432 1.5c.406.839 1 1.563 1.766 2.021c1.141.682 2.672.901 4.276.542c1.042-.302 1.943-.922 2.411-1.88c.682-1.24.536-2.76.531-4.464c.016-2.74 0-5.479 0-8.24z"
+          />
+        </svg>
+      </button>
       <ReactHinter
         namespace="scramble"
         active={active}
         onEnd={() => setActive(false)}
-        content={Component}
-      />
-      <ReactHinter
-        namespace="scramble2"
-        active={active2}
-        onEnd={() => setActive2(false)}
         content={Component}
       />
     </div>

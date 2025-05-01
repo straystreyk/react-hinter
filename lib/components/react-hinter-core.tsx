@@ -95,7 +95,6 @@ export const ReactHinterCore: FC<ReactHinterProps> = ({
 
   useEffect(() => {
     if (active && canUseDOM()) {
-      console.log(namespace, active);
       setIsVisible(true);
 
       const elems = document.querySelectorAll(
