@@ -21,12 +21,18 @@ export const ReactHinterCore: FC<ReactHinterProps> = ({
   onEnd,
   content: Content,
   className,
+  scrollToActiveElement,
 }) => {
   const ref = useRef<HTMLDivElement>(null);
   const [info, setInfo] = useState(initialState);
   const [isFirstStepPassed, setIsFirstStepPassed] = useState(false);
   const [isVisible, setIsVisible] = useState(false); // Управление видимостью
-  const { renderPositionStopped } = useRenderPosition({ ref, setInfo, info });
+  const { renderPositionStopped } = useRenderPosition({
+    ref,
+    setInfo,
+    info,
+    scrollToActiveElement,
+  });
 
   const {
     elements,

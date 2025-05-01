@@ -16,10 +16,12 @@ export const useRenderPosition: (opts: {
   info: TState;
   ref: RefObject<HTMLDivElement | null>;
   setInfo: Dispatch<SetStateAction<TState>>;
+  scrollToActiveElement?: boolean;
 }) => { renderPositionStopped: boolean } = ({
   ref,
   info: { elements, currentStep },
   setInfo,
+  scrollToActiveElement,
 }) => {
   const isTabletOrMobile = useMediaQuery("(max-width: 1024px)");
   const renderPosition = useCallback(() => {
@@ -28,7 +30,15 @@ export const useRenderPosition: (opts: {
     const currentElement = elements[currentStep - 1];
     if (!currentElement) return;
 
-    const { left, top } = renderHinterPos(currentElement, ref.current);
+    const { left, top, isInViewport } = renderHinterPos(
+      currentElement,
+      ref.current
+    );
+
+    if (!isInViewport && scrollToActiveElement) {
+      currentElement.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+
     setInfo((p) => ({ ...p, position: { left, top } }));
   }, [currentStep, elements, isTabletOrMobile, ref, setInfo]);
 

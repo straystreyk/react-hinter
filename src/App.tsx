@@ -4,11 +4,20 @@ import "../lib/styles/glob.scss";
 import "./glob.scss";
 import { ReactHinter, ReactHinterContentProps } from "../lib/main.ts";
 
-const Component: FC<ReactHinterContentProps> = ({ text, finish, nextStep }) => {
+const Component: FC<ReactHinterContentProps> = ({
+  text,
+  finish,
+  nextStep,
+  prevStep,
+}) => {
   return (
-    <div>
-      {text} <button onClick={nextStep}>next</button>
-      {text} <button onClick={finish}>finish</button>
+    <div className="custom-content">
+      <h3>{text}</h3>
+      <div className="custom-content-footer">
+        <button onClick={prevStep}>back</button>
+        <button onClick={finish}>Finish</button>
+        <button onClick={nextStep}>Next</button>
+      </div>
     </div>
   );
 };
@@ -18,12 +27,25 @@ function App() {
 
   return (
     <div>
-      <button onClick={() => setActive(true)}>Show a hint!</button>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          marginTop: "20px",
+        }}
+      >
+        <button
+          style={{ textAlign: "center", margin: "0 auto" }}
+          onClick={() => setActive(true)}
+        >
+          Show a hint!
+        </button>
+      </div>
       <button
         data-rh-namespace="scramble"
-        data-rh-text="hello world"
+        data-rh-text="This is React"
         data-rh-step={1}
-        className="custom-icon"
+        className="custom-icon custom-icon-1"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -39,9 +61,9 @@ function App() {
       </button>
       <button
         data-rh-namespace="scramble"
-        data-rh-text="hello world"
+        data-rh-text="This is WebStorm"
         data-rh-step={2}
-        className="custom-icon"
+        className="custom-icon custom-icon-2"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -57,10 +79,10 @@ function App() {
       </button>
       <button
         data-rh-namespace="scramble"
-        data-rh-text="hello world"
+        data-rh-text="This is JavaScript"
         data-rh-preferred-position="top"
         data-rh-step={3}
-        className="custom-icon"
+        className="custom-icon custom-icon-3"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -79,6 +101,7 @@ function App() {
         active={active}
         onEnd={() => setActive(false)}
         content={Component}
+        scrollToActiveElement
       />
     </div>
   );

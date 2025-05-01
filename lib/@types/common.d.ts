@@ -20,6 +20,7 @@ interface ReactHinterProps {
   content?: FC<ReactHinterContentProps>;
   className?: string;
   portal?: boolean | string;
+  scrollToActiveElement?: boolean;
 }
 
 declare const ReactHinter: (props: ReactHinterProps) => React.JSX.Element;

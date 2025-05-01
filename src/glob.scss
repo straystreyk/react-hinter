@@ -52,4 +52,31 @@ ol {
   justify-content: center;
   align-items: center;
   padding: 0.75rem;
+  position: absolute;
+
+  &-1 {
+    top: 250px;
+    left: 500px;
+  }
+  &-2 {
+    top: 250px;
+    left: 1000px;
+  }
+  &-3 {
+    top: 1000px;
+    left: 750px;
+  }
+}
+
+.custom-content {
+  text-align: center;
+}
+
+.custom-content-footer {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  & button {
+    width: 100%;
+  }
 }

@@ -5,8 +5,20 @@ export const renderHinterPos = (
   element: HTMLElement,
   hinterElement: HTMLDivElement
 ) => {
-  const { left, top } = element.getBoundingClientRect();
+  const rect = element.getBoundingClientRect();
+  const { left, top } = rect;
   const offsetTop = top + window.scrollY;
+
+  const windowHeight =
+    window.innerHeight || document.documentElement.clientHeight;
+  const windowWidth = window.innerWidth || document.documentElement.clientWidth;
+
+  const isInViewport =
+    rect.top <= windowHeight &&
+    rect.bottom >= 0 &&
+    rect.left <= windowWidth &&
+    rect.right >= 0;
+
   let leftToUse = left + element.offsetWidth / 2;
   let topToUse = offsetTop + OFFSET + element.offsetHeight;
 
@@ -17,8 +29,8 @@ export const renderHinterPos = (
   if (leftToUse - hinterWidth / 2 < 0) {
     leftToUse += (leftToUse - hinterWidth / 2 - OFFSET) * -1;
   }
-  if (leftToUse + hinterWidth / 2 > window.innerWidth) {
-    leftToUse -= leftToUse + hinterWidth / 2 - window.innerWidth + OFFSET;
+  if (leftToUse + hinterWidth / 2 > windowWidth) {
+    leftToUse -= leftToUse + hinterWidth / 2 - windowWidth + OFFSET;
   }
 
   if (preferredPos === "bottom") {
@@ -36,5 +48,6 @@ export const renderHinterPos = (
   return {
     left: leftToUse,
     top: topToUse,
+    isInViewport,
   };
 };
