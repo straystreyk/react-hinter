@@ -8,6 +8,20 @@
   "files": [
     "dist"
   ],
+  "keywords": [
+    "react",
+    "hinter",
+    "tooltip",
+    "ui"
+  ],
+  "homepage": "https://github.com/straystreyk/react-hinter#readme",
+  "bugs": {
+    "url": "https://github.com/straystreyk/react-hinter/issues"
+  },
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=7.0.0"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/straystreyk/react-hinter.git"

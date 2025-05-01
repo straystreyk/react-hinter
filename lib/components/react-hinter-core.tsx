@@ -24,8 +24,9 @@ export const ReactHinterCore: FC<ReactHinterProps> = ({
 }) => {
   const ref = useRef<HTMLDivElement>(null);
   const [info, setInfo] = useState(initialState);
-  const { renderPositionStopped } = useRenderPosition({ ref, setInfo, info });
   const [isFirstStepPassed, setIsFirstStepPassed] = useState(false);
+  const [isVisible, setIsVisible] = useState(false); // Управление видимостью
+  const { renderPositionStopped } = useRenderPosition({ ref, setInfo, info });
 
   const {
     elements,
@@ -56,6 +57,9 @@ export const ReactHinterCore: FC<ReactHinterProps> = ({
       if (currentStep === 1) {
         setIsFirstStepPassed(true);
       }
+    } else {
+      setInfo((p) => ({ ...p, position: {} }));
+      setIsVisible(false);
     }
   };
 
@@ -91,8 +95,10 @@ export const ReactHinterCore: FC<ReactHinterProps> = ({
 
   useEffect(() => {
     if (active && canUseDOM()) {
+      setIsVisible(true);
+
       const elems = document.querySelectorAll(
-        `[data-rh-namespace='${namespace}']`,
+        `[data-rh-namespace='${namespace}']`
       );
       if (!elems) {
         onEnd();
@@ -103,11 +109,11 @@ export const ReactHinterCore: FC<ReactHinterProps> = ({
         b.dataset?.rhStep &&
         +i.dataset?.rhStep < +b.dataset?.rhStep
           ? -1
-          : 1,
+          : 1
       );
 
       const firstElement = parsedElems.find(
-        (item) => (item as HTMLElement)?.dataset?.rhStep?.toString() === "1",
+        (item) => (item as HTMLElement)?.dataset?.rhStep?.toString() === "1"
       );
 
       if (!firstElement) {
@@ -127,6 +133,7 @@ export const ReactHinterCore: FC<ReactHinterProps> = ({
     }
   }, [namespace, active, onEnd]);
 
+  if (!active && !isVisible) return null; // Полностью убираем из DOM
   return (
     <div
       ref={ref}
@@ -136,7 +143,7 @@ export const ReactHinterCore: FC<ReactHinterProps> = ({
           react-hinter-wrapper  
           ${className || ""} 
           react-hinter-namespace__${namespace}  
-          react-hinter-active__${active}
+          react-hinter-active__${isVisible && active}
           react-hinter-step__${currentStep} 
           react-hinter-is-first-step-transition-end__${isFirstStepPassed}
           react-hinter-is-last-step__${infoSteps > 0 && currentStep === infoSteps}
