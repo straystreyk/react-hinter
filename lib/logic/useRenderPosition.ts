@@ -35,7 +35,7 @@ export const useRenderPosition: (opts: {
 
   const debouncedRenderPosition = useMemo(
     () => debounce(renderPosition, 100),
-    [renderPosition],
+    [renderPosition]
   );
 
   const refToRenderPosition = useRef(debouncedRenderPosition);

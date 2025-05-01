@@ -3,11 +3,12 @@ const DEAD_LINE = 10 + OFFSET;
 
 export const renderHinterPos = (
   element: HTMLElement,
-  hinterElement: HTMLDivElement,
+  hinterElement: HTMLDivElement
 ) => {
-  const { left } = element.getBoundingClientRect();
+  const { left, top } = element.getBoundingClientRect();
+  const offsetTop = top + window.scrollY;
   let leftToUse = left + element.offsetWidth / 2;
-  let topToUse = element.offsetTop + OFFSET + element.offsetHeight;
+  let topToUse = offsetTop + OFFSET + element.offsetHeight;
 
   const preferredPos = element.dataset?.rhPreferredPosition || "bottom";
   const hinterHeight = hinterElement.offsetHeight;
@@ -23,13 +24,13 @@ export const renderHinterPos = (
   if (preferredPos === "bottom") {
     const range = window.innerHeight - hinterHeight - topToUse;
     // если указали bottom а нет места на отрисовку внизу
-    if (range < DEAD_LINE) topToUse = element.offsetTop - hinterHeight - OFFSET;
+    if (range < DEAD_LINE) topToUse = offsetTop - hinterHeight - OFFSET;
   }
 
   if (preferredPos === "top") {
-    const range = element.offsetTop - hinterHeight - OFFSET;
+    const range = offsetTop - hinterHeight - OFFSET;
     // если указали top а нет места на отрисовку внизу
-    if (range > DEAD_LINE) topToUse = element.offsetTop - hinterHeight - OFFSET;
+    if (range > DEAD_LINE) topToUse = offsetTop - hinterHeight - OFFSET;
   }
 
   return {

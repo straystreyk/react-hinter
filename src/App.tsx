@@ -76,7 +76,17 @@ function App() {
           Step 3: Take a pan
         </button>
       </div>
-      <div style={{ display: "flex", gap: 5, marginTop: 50, marginLeft: 800 }}>
+      <div
+        style={{
+          position: "absolute",
+          display: "flex",
+          gap: 5,
+          left: 0,
+          bottom: 0,
+          marginTop: 50,
+          marginLeft: 800,
+        }}
+      >
         <button
           data-rh-namespace="scramble2"
           data-rh-step={1}
@@ -112,7 +122,6 @@ function App() {
       <ReactHinter
         namespace="scramble2"
         active={active2}
-        portal={false}
         onEnd={() => setActive2(false)}
         content={Component}
       />
