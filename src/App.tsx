@@ -18,6 +18,7 @@ const Component: FC<ReactHinterContentProps> = ({ text, finish, nextStep }) => {
 
 function App() {
   const [active, setActive] = useState(false);
+  const [active2, setActive2] = useState(false);
 
   return (
     <div
@@ -37,6 +38,16 @@ function App() {
         }}
       >
         <button onClick={() => setActive(true)}>Show the recipe</button>
+      </div>{" "}
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          marginBottom: 100,
+          marginTop: 300,
+        }}
+      >
+        <button onClick={() => setActive2(true)}>Show the recipe 2</button>
       </div>
       <div style={{ display: "flex", gap: 5, marginTop: 50, marginLeft: 800 }}>
         <button
@@ -65,11 +76,44 @@ function App() {
           Step 3: Take a pan
         </button>
       </div>
+      <div style={{ display: "flex", gap: 5, marginTop: 50, marginLeft: 800 }}>
+        <button
+          data-rh-namespace="scramble2"
+          data-rh-step={1}
+          data-rh-text="Take 2 eggs and beat them!"
+          data-rh-preferred-position="bottom"
+        >
+          Step 1: Take eggs
+        </button>
 
+        <button
+          data-rh-namespace="scramble2"
+          data-rh-step={2}
+          data-rh-text="Enjoy your meal :)"
+          data-rh-preferred-position="bottom"
+        >
+          Step 2: Enjoy
+        </button>
+        <button
+          data-rh-namespace="scramble2"
+          data-rh-step={3}
+          data-rh-text="Take a pen and heat it well!"
+          data-rh-preferred-position="top"
+        >
+          Step 3: Take a pan
+        </button>
+      </div>
       <ReactHinter
         namespace="scramble"
         active={active}
         onEnd={() => setActive(false)}
+        content={Component}
+      />
+      <ReactHinter
+        namespace="scramble2"
+        active={active2}
+        portal={false}
+        onEnd={() => setActive2(false)}
         content={Component}
       />
     </div>

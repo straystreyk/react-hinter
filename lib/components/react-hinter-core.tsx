@@ -95,6 +95,7 @@ export const ReactHinterCore: FC<ReactHinterProps> = ({
 
   useEffect(() => {
     if (active && canUseDOM()) {
+      console.log(namespace, active);
       setIsVisible(true);
 
       const elems = document.querySelectorAll(
@@ -131,7 +132,7 @@ export const ReactHinterCore: FC<ReactHinterProps> = ({
         elements: parsedElems,
       }));
     }
-  }, [namespace, active, onEnd]);
+  }, [namespace, active]);
 
   if (!active && !isVisible) return null; // Полностью убираем из DOM
   return (

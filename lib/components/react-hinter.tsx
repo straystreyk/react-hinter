@@ -10,13 +10,25 @@ export type TState = Pick<
 >;
 
 export const ReactHinter: FC<ReactHinterProps> = memo((props) => {
-  const { namespace } = props;
+  const { namespace, portal = true } = props;
 
-  if (!namespace) return null;
+  if (!namespace) {
+    console.error(
+      "[REACT HINTER]: You should pass a namespace for a ReactHinter component"
+    );
+    return null;
+  }
 
-  return (
-    <Portal wrapperId="__REACT_HINTER_PORTAL__">
-      <ReactHinterCore {...props} />
-    </Portal>
-  );
+  if (portal) {
+    return (
+      <Portal
+        wrapperId={
+          typeof portal === "string" ? portal : "__REACT_HINTER_PORTAL__"
+        }
+      >
+        <ReactHinterCore {...props} />
+      </Portal>
+    );
+  }
+  return <ReactHinterCore {...props} />;
 });

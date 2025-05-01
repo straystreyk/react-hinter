@@ -19,6 +19,7 @@ interface ReactHinterProps {
   onEnd: () => void;
   content?: FC<ReactHinterContentProps>;
   className?: string;
+  portal?: boolean | string;
 }
 
 declare const ReactHinter: (props: ReactHinterProps) => React.JSX.Element;
